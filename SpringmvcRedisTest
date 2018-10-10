@@ -1,0 +1,25 @@
+
+import com.huawei.ngcloudportal.framework.redis.RedisCache;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.io.Serializable;
+
+public class SpringmvcRedisTest {
+
+    public static void main(String[] args) throws Exception {
+        @SuppressWarnings("resource")
+        ApplicationContext context=new ClassPathXmlApplicationContext("classpath*:spring-redis.xml");
+        RedisCache redisUtil=(RedisCache) context.getBean("RedisCache");
+
+        //=====================testString======================
+//        redisUtil.set("name", "王赛超");
+//        redisUtil.set("age", 24);
+        redisUtil.set("test1", "adfadfasdf");
+
+        //System.out.println(redisUtil.set("address", "河北邯郸", 50));
+
+        System.out.println(redisUtil.get("test1"));
+            }
+
+}
