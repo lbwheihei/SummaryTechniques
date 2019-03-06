@@ -1,1 +1,51 @@
 总结
+
+React 特点
+1.声明式设计 −React采用声明范式，可以轻松描述应用。
+2.高效 −React通过对DOM的模拟，最大限度地减少与DOM的交互。
+3.灵活 −React可以与已知的库或框架很好地配合。
+4.JSX − JSX 是 JavaScript 语法的扩展。React 开发不一定使用 JSX ，但我们建议使用它。
+5.组件 − 通过 React 构建组件，使得代码更加容易得到复用，能够很好的应用在大项目的开发中。
+6.单向响应的数据流 − React 实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。
+
+
+当你调用setState的时候，发生了什么事？
+当调用 setState 时，React会做的第一件事情是将传递给 setState 的对象合并到组件的当前状态。这将启动一个称为和解（reconciliation）的过程。和解（reconciliation）的最终目标是以最有效的方式，根据这个新的状态来更新UI。 为此，React将构建一个新的 React 元素树（您可以将其视为 UI 的对象表示）。一旦有了这个树，为了弄清 UI 如何响应新的状态而改变，React 会将这个新树与上一个元素树相比较（ diff ）。通过这样做， React 将会知道发生的确切变化，并且通过了解发生什么变化，只需在绝对必要的情况下进行更新即可最小化 UI 的占用空间。
+
+什么时候在功能组件( Class Component )上使用类组件( Functional Component )？
+如果您的组件具有状态( state )或生命周期方法，请使用 Class 组件。否则，使用功能组件
+
+React 中的keys是什么，为什么它们很重要？
+keys是什么帮助 React 跟踪哪些项目已更改、添加或从列表中删除。
+
+  return (
+    <ul>
+      {this.state.todoItems.map(({task, uid}) => {
+        return <li key={uid}>{task}</li>
+      })}
+    </ul>
+  )
+每个 keys 在兄弟元素之间是独一无二的。我们已经谈过几次关于和解（reconciliation）的过程，而且这个和解过程（reconciliation）中的一部分正在执行一个新的元素树与最前一个的差异。keys 使处理列表时更加高效，因为 React 可以使用子元素上的 keys 快速知道元素是新的还是在比较树时才被移动。
+
+而且 keys 不仅使这个过程更有效率，而且没有 keys ，React 不知道哪个本地状态对应于移动中的哪个项目。所以当你 map 的时候，不要忽略了 keys 。
+
+在哪个生命周期事件中你会发出 AJAX 请求，为什么？
+AJAX 请求应该在 componentDidMount 生命周期事件中。 有几个原因:
+
+Fiber，是下一次实施React的和解算法，将有能力根据需要启动和停止渲染，以获得性能优势。其中一个取舍之一是 componentWillMount ，而在其他的生命周期事件中出发 AJAX 请求，将是具有 “非确定性的”。 这意味着 React 可以在需要时感觉到不同的时间开始调用 componentWillMount。这显然是AJAX请求的不好的方式。
+-您不能保证在组件挂载之前，AJAX请求将无法 resolve。如果这样做，那意味着你会尝试在一个未挂载的组件上设置 StState，这不仅不会起作用，反而会对你大喊大叫。 在 componentDidMount 中执行 AJAX 将保证至少有一个要更新的组件。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
