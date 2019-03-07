@@ -8,6 +8,20 @@ React 特点
 5.组件 − 通过 React 构建组件，使得代码更加容易得到复用，能够很好的应用在大项目的开发中。
 6.单向响应的数据流 − React 实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。
 
+React 的生命周期以及生命周期中出现的函数React 
+组件有三个状态：Mounted  Update  Unmounted
+Mounted 指的是 React 组件首次 render 的过程
+Update 指的是 React 组件被重新 render 的过程
+Unmounted 指的是 React 组件被移除的过程
+
+在这里我讲几个用的比较多的函数在 Mounting 过程中，getInitialState() 方法可以用于定义组件的初始状态（state），在我们与用户交互的时候产生变化的特性，比如我们可以利用 state 初始化组件的样式
+componentWillMount() componentDidMount() 这两个函数在 render 方法调用前、后分别调用。可以在页面插入组件前后改变组件的 state （setState() 方法）
+https://blog.csdn.net/u013558749/article/details/61203823
+
+state
+state顾名思义就是状态，它只是用来控制这个组件本身自己的状态，我们可以用state来完成对行为的控制、数据的更新、界面的渲染，由于组件不能修改传入的props，所以需要记录自身的数据变化。
+props
+react中说的单向数据流值说的就是props，根据这一特点它还有一个作用：组件之间的通信。props本身是不可变的，但是有一种情形它貌似可变，即是将父组件的state作为子组件的props，当父组件的state改变，子组件的props也跟着改变，其实它仍旧遵循了这一定律：props是不可更改的。
 
 当你调用setState的时候，发生了什么事？
 当调用 setState 时，React会做的第一件事情是将传递给 setState 的对象合并到组件的当前状态。这将启动一个称为和解（reconciliation）的过程。和解（reconciliation）的最终目标是以最有效的方式，根据这个新的状态来更新UI。 为此，React将构建一个新的 React 元素树（您可以将其视为 UI 的对象表示）。一旦有了这个树，为了弄清 UI 如何响应新的状态而改变，React 会将这个新树与上一个元素树相比较（ diff ）。通过这样做， React 将会知道发生的确切变化，并且通过了解发生什么变化，只需在绝对必要的情况下进行更新即可最小化 UI 的占用空间。
